@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LTube Mini App</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background-color: #0f0f0f;
+      color: #ffffff;
+      font-family: sans-serif;
+    }
+    .fallback {
+      position: fixed;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      gap: 14px;
+      background: #0f0f0f;
+    }
+    .fallback.show { display: flex; }
+    .fallback a {
+      background: #2aabee;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <iframe
+    id="frame"
+    src="https://ltube.us"
+    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+    allowfullscreen
+  ></iframe>
+
+  <div id="fallback" class="fallback">
+    <p>El sitio bloqueó la vista incrustada o tardó en responder.</p>
+    <a id="openBtn" href="https://ltube.us" target="_blank" rel="noopener">Abrir en el navegador</a>
+  </div>
+
+  <script>
+    const tg = window.Telegram && window.Telegram.WebApp;
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
+    const frame = document.getElementById('frame');
+    const fallback = document.getElementById('fallback');
+    const openBtn = document.getElementById('openBtn');
+
+    if (openBtn && tg && tg.openLink) {
+      openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        tg.openLink('https://ltube.us');
+      });
+    }
+
+    // Si tras 6 segundos el iframe no dispara load o queda vacío, muestra el respaldo
+    let loaded = false;
+    frame.addEventListener('load', () => {
+      loaded = true;
+    });
+
+    setTimeout(() => {
+      if (!loaded) {
+        fallback.classList.add('show');
+      }
+    }, 6000);
+  </script>
+</body>
+</html>
