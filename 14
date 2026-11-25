@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Título de tu enlace</title>
+
+  <!-- Etiquetas para X (Twitter) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@tu_usuario" />
+  <meta name="twitter:title" content="Título de la tarjeta" />
+  <meta name="twitter:description" content="Descripción corta." />
+  <meta name="twitter:image" content="https://i.imgur.com/SfvHMAl.jpeg" />
+
+  <!-- Redirección silenciosa e instantánea -->
+  <script>
+    window.location.replace("https://enlace-de-destino-final.com");
+  </script>
+  <meta http-equiv="refresh" content="0; url=https://enlace-de-destino-final.com" />
+</head>
+<body></body>
+</html>
